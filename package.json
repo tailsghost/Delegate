@@ -1,0 +1,25 @@
+{
+  "name": "delegate-handler",
+  "version": "1.0.4",
+  "description": "",
+  "main": "./dist/Delegate.js",
+  "types": "./dist/Delegate.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tailsghost/Delegate.git"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "keywords": ["delegate", "handler"],
+  "author": "AndreyXP",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/tailsghost/Delegate/"
+  },
+  "homepage": "https://github.com/tailsghost/Delegate#readme"
+}
