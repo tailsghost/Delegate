@@ -23,7 +23,7 @@ class Delegate<TArgs extends any[]> {
     if (this.argCount !== (func as any).length) {
       throw new RangeError("Неверное число параметров");
     }
-    this.funcs.filter((f) => f != func);
+   this.funcs = this.funcs.filter((f) => f != func);
   }
 
   protected GetFuncs(): Array<(...args: TArgs) => any> {

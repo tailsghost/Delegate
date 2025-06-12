@@ -19,7 +19,7 @@ class Delegate {
         if (this.argCount !== func.length) {
             throw new RangeError("Неверное число параметров");
         }
-        this.funcs.filter((f) => f != func);
+        this.funcs = this.funcs.filter((f) => f != func);
     }
     GetFuncs() {
         return this.funcs;
