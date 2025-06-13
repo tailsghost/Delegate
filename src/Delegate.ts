@@ -1,15 +1,12 @@
 class Delegate<TArgs extends any[]> {
   private funcs: Array<(...args: TArgs) => any> = [];
-  private readonly argCount: number;
+  protected readonly argCount: number;
 
-  /**
-   * @param expectedArgCount — ожидаемое число аргументов в TArgs
-   */
-  constructor(expectedArgCount: number) {
-    if (typeof expectedArgCount !== "number") {
+  constructor(argCount: number = 0) {
+    if (typeof argCount !== "number") {
       throw new TypeError("expectedArgCount должен быть числом");
     }
-    this.argCount = expectedArgCount;
+    this.argCount = argCount;
   }
 
   Add(func: (...args: TArgs) => any): void {
@@ -23,7 +20,7 @@ class Delegate<TArgs extends any[]> {
     if (this.argCount !== (func as any).length) {
       throw new RangeError("Неверное число параметров");
     }
-   this.funcs = this.funcs.filter((f) => f != func);
+    this.funcs = this.funcs.filter((f) => f != func);
   }
 
   protected GetFuncs(): Array<(...args: TArgs) => any> {
@@ -31,9 +28,13 @@ class Delegate<TArgs extends any[]> {
   }
 }
 
-class Action<TArgs extends any[]> extends Delegate<TArgs> {
-  constructor(argCount: number) {
+export class Action<TArgs extends any[]> extends Delegate<TArgs> {
+  constructor(argCount: number = 0) {
     super(argCount);
+  }
+
+  Add(func: (...args: TArgs) => void): void {
+    super.Add(func);
   }
 
   Invoke(...args: TArgs): void {
@@ -43,14 +44,13 @@ class Action<TArgs extends any[]> extends Delegate<TArgs> {
   }
 }
 
-class Func<TArgs extends any[], TResult> extends Delegate<TArgs> {
-  constructor(argCount: number) {
+export class Func<TArgs extends any[], TResult> extends Delegate<TArgs> {
+  constructor(argCount: number = 0) {
     super(argCount);
   }
 
-    Add(func: (...args: TArgs) => TResult): void {
-    
-    super.Add(func)
+  Add(func: (...args: TArgs) => TResult): void {
+    super.Add(func);
   }
 
   Invoke(...args: TArgs): TResult | undefined {
@@ -67,5 +67,3 @@ class Func<TArgs extends any[], TResult> extends Delegate<TArgs> {
     return lastResult;
   }
 }
-
-export const  DelegateRepository = {Action,Func}

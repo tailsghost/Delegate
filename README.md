@@ -27,13 +27,13 @@ npm i delegate-handler
 ## 🚀 Пример использования
 
 ```ts
-import {DelegateRepository} from "delegate-handler"
+import {Func} from "delegate-handler"
 
 const multiply = (param1: number, param2: number): number => {
     return param1 * param2;
 }
 
-const func = new DelegateRepository.Func<[number, number], number>(2); // В конструктор передаем кол-во аргументов в функции
+const func = new Func<[number, number], number>(2); // В конструктор передаем кол-во аргументов в функции
 func.Add(multiply);
 const result = func.Invoke(2, 6);
 console.log(result); // Вывод: 12
